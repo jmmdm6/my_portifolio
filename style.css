@@ -393,13 +393,15 @@ main .sobre {
     cursor: default;
     border-radius: 6px;
     position: relative;
-    padding: 10px;
+    padding: 24px;
     display: grid;
-    gap: 30px;
+    grid-template-rows: auto auto 1fr;
+    gap: 16px;
     text-align: center;
+    width: 100%;
     max-width: 300px;
-    align-content: center;
-    height: 300px;
+    align-content: start;
+    min-height: 260px;
     background-color: #222;
 }
 
@@ -801,6 +803,11 @@ main .sobre {
     gap: 30px;
 }
 
+.project_models ul {
+    flex-wrap: wrap;
+    padding: 0 10px;
+}
+
 .project_models ul li {
     cursor: pointer;
     font-family: 'Poppins';
@@ -1021,6 +1028,35 @@ footer .sobre_titulo p {
     .projects_armazenamento ul {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .my_services {
+        padding: 40px 20px;
+    }
+
+    .my_services ul li {
+        min-height: 220px;
+    }
+}
+
+@media(max-width: 600px) {
+    .projects {
+        padding: 20px 16px;
+    }
+
+    .projects_armazenamento ul {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .my_services ul {
+        gap: 16px;
+    }
+
+    .my_services ul li {
+        max-width: 100%;
+        min-height: auto;
+        padding: 20px;
+    }
 }
 
 /* Em telas sem hover (touch), mantém o título do projeto sempre visível
@@ -1044,33 +1080,4 @@ footer .sobre_titulo p {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
-}
-    font-family: "poppins";
-    font-weight: bold;
-}
-
-.resume_generico .education_content div h3 {
-    font-family: "poppins";
-    margin: 10px 0;
-}
-
-.resume_generico .education_content div p {
-    color: #707070;
-    font-size: 1.3rem;
-}
-
-.education_content ul li.ativo {
-    color:#3e3d3d
-}
-
-.resume_generico .education_content div.ativo {
-    display: block;
-}
-
-/* CURSOS E SKILLS */
-
-.cursos {
-    margin-top: 50px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
