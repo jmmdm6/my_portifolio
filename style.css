@@ -860,16 +860,6 @@ main .sobre {
     filter: brightness(.5);
 }
 
-/* Link que envolve o card inteiro (imagem + info) quando o projeto
-   abre em outra página, como o Snake Game e a Calculadora Web */
-.project_link {
-    display: block;
-    width: 100%;
-    height: 100%;
-    color: inherit;
-    text-decoration: none;
-}
-
 .project_info {
     position: absolute;
     left: 0;
