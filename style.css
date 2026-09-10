@@ -9,11 +9,15 @@
     text-decoration: none;
 }
 
+html {
+    overflow-x: hidden;
+}
+
 body {
     background-color: #000;
     max-width: 1200px;
     margin: 0 auto;
-
+    overflow-x: hidden;
 }
 
 
@@ -182,7 +186,8 @@ main .sobre {
     color: #fff;
 }
 
-.sobre_titulo h1 {
+.sobre_titulo h1,
+.sobre_titulo h2 {
     font-size: 2.5rem;
     color: #ff5d56;
     margin-bottom: 15px;
@@ -238,13 +243,15 @@ main .sobre {
     grid-template-columns: 1fr 1fr;
 }
 
-.sobre_texto h1 {
+.sobre_texto h1,
+.sobre_texto h3 {
     font-size: 2.3rem;
     color: #fff;
     grid-column: 1/-1;
 }
 
-.sobre_texto h1::after {
+.sobre_texto h1::after,
+.sobre_texto h3::after {
     background-color: #ff5d56;
     height: 6px;
     width: 60px;
@@ -299,70 +306,6 @@ main .sobre {
 
     to {
         transform: translate3d(0, 0, 0);
-    }
-}
-
-
-/* RESPONSIVO */
-
-@media(max-width: 992px) {
-    .section-div img {
-        display: none;
-    }
-
-    .section-div {
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    header {
-        justify-content: space-between;
-        padding: 30px 70px;
-    }
-
-    header .navegacao-primaria {
-        display: none;
-    }
-
-    header .fa-bars {
-        display: block;
-        color: #f7f7f7;
-        font-size: 3rem;
-    }
-
-    header .navegacao-primaria.ativado {
-        background: linear-gradient(rgba(43, 42, 42, 0.176), rgba(46, 46, 46, 0.724));
-        position: absolute;
-        display: grid;
-        top: 80px;
-        color: white;
-        z-index: 1;
-        padding: 30px;
-        font-size: 1.6rem;
-        font-weight: bold;
-        border-radius: 0 0 4px 4px;
-        right: 20px;
-        animation: sobeSecao .8s ease-in-out forwards;
-    }
-}
-
-
-@media(max-width: 992px) {
-    .sobre img {
-        grid-column: 1/-1;
-        justify-self: center;
-    }
-
-    .sobre_conteudo {
-        grid-column: 1/-1;
-    }
-
-    main .sobre {
-        grid-template-columns: 1fr;
-    }
-
-    .sobre_info {
-        grid-template-columns: 1fr;
     }
 }
 
@@ -476,7 +419,7 @@ main .sobre {
     grid-template-columns: 1fr 1fr;
 }
 
-.resume_gerenico h2 {
+.resume_gerenico h3 {
     font-family: 'Poppins';
     font-size: 1.5rem;
     background-color: #ff5d56;
@@ -485,7 +428,7 @@ main .sobre {
     border-radius: 1px;
 }
 
-.resume_gerenico h2 i {
+.resume_gerenico h3 i {
     margin-right: 10px;
 }
 
@@ -536,7 +479,7 @@ main .sobre {
     font-weight: bold;
 }
 
-.resume_gerenico .experience_content div h3 {
+.resume_gerenico .experience_content div h4 {
     font-family: 'Poppins';
     margin: 10px 0;
 }
@@ -591,7 +534,7 @@ main .sobre {
     font-weight: bold;
 }
 
-.resume_gerenico .education_content div h3 {
+.resume_gerenico .education_content div h4 {
     font-family: 'Poppins';
     margin: 10px 0;
 }
@@ -629,7 +572,7 @@ main .sobre {
     display: grid;
 }
 
-.my_skill h2 {
+.my_skill h3 {
     padding: 10px 30px;
     border-radius: 3px;
     font-size: 1.5rem;
@@ -639,7 +582,7 @@ main .sobre {
     margin-bottom: 30px;
 }
 
-.my_skill h2 i {
+.my_skill h3 i {
     padding-right: 10px;
 }
 
@@ -652,7 +595,7 @@ main .sobre {
     margin-top: 10px;
 }
 
-.skill_content h3 {
+.skill_content h4 {
     font-size: 1.5rem;
 }
 
@@ -670,7 +613,7 @@ main .sobre {
     grid-template-columns: 1fr 1fr;
 }
 
-.funfacts h2 {
+.funfacts h3 {
     grid-column: 1/-1;
     padding: 10px 30px;
     border-radius: 3px;
@@ -681,7 +624,7 @@ main .sobre {
     margin-bottom: 30px;
 }
 
-.funfacts h2 i {
+.funfacts h3 i {
     padding-right: 10px;
 }
 
@@ -760,7 +703,7 @@ main .sobre {
         grid-template-columns: 1fr;
     }
 
-    .cursos .funfacts h2 {
+    .cursos .funfacts h3 {
         justify-self: center;
     }
 
@@ -772,7 +715,7 @@ main .sobre {
         grid-column: 1/-1;
     }
 
-    .cursos .my_skill h2 {
+    .cursos .my_skill h3 {
         justify-self: center;
     }
 
@@ -921,7 +864,8 @@ footer {
     color: #f7f7f7;
 }
 
-footer .sobre_titulo h1 {
+footer .sobre_titulo h1,
+footer .sobre_titulo h2 {
     font-family: 'Berkshire Swash', cursive;
 }
 
@@ -935,6 +879,7 @@ footer .sobre_titulo p {
     justify-content: center;
     gap: 20px;
     margin-top: 30px;
+    flex-wrap: wrap;
 }
 
 .footer_sociais a {
@@ -983,45 +928,232 @@ footer .sobre_titulo p {
 }
 
 
-/* TELAS PEQUENAS */
+/* ===================================================== */
+/* RESPONSIVO — reescrito para não "apertar" no celular   */
+/* ===================================================== */
 
-@media(max-width: 480px) {
-    .section-div {
-        padding: 30px 20px;
-        gap: 30px;
-    }
+/* Tablets e celulares grandes (até 992px) */
+@media(max-width: 992px) {
 
-    .section-div div {
-        margin-top: 40px;
+    header {
+        justify-content: space-between;
+        padding: 20px 24px;
     }
 
     header h1 {
         font-size: 1.8rem;
     }
 
-    .cursos {
-        padding: 10px;
+    header .navegacao-primaria {
+        display: none;
     }
 
-    .skill_content {
+    header .fa-bars {
+        display: block;
+        color: #f7f7f7;
+        font-size: 2rem;
+    }
+
+    header .navegacao-primaria.ativado {
+        background: linear-gradient(rgba(43, 42, 42, 0.176), rgba(46, 46, 46, 0.724));
+        position: absolute;
+        display: grid;
+        top: 70px;
+        color: white;
+        z-index: 10;
+        padding: 24px;
+        font-size: 1.3rem;
+        font-weight: bold;
+        border-radius: 0 0 4px 4px;
+        right: 20px;
+        left: 20px;
+        justify-items: center;
+        gap: 16px;
+        animation: sobeSecao .8s ease-in-out forwards;
+    }
+
+    /* Hero: some a imagem e vira 1 coluna só, ocupando a tela toda */
+    .section-div {
         grid-template-columns: 1fr;
-        gap: 10px;
+        padding: 40px 24px;
+        gap: 24px;
+        text-align: center;
     }
 
-    .projects_armazenamento ul {
-        grid-template-columns: repeat(2, 1fr);
+    .section-div img {
+        display: none;
+    }
+
+    .section-div div {
+        margin-top: 40px;
+        justify-items: center;
+        gap: 20px;
+    }
+
+    .section-div div a {
+        justify-self: center;
+    }
+
+    .footer_sociais {
+        justify-content: center;
+    }
+
+    /* Sobre mim: 1 coluna */
+    main .sobre {
+        grid-template-columns: 1fr;
+        padding: 24px;
+        gap: 24px;
+    }
+
+    .sobre img {
+        grid-column: 1/-1;
+        grid-row: auto;
+        justify-self: center;
+        max-width: 260px;
+    }
+
+    .sobre_conteudo {
+        grid-column: 1/-1;
+        grid-template-columns: 1fr;
+    }
+
+    .sobre_texto {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .sobre_info {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+    .sobre_titulo h1,
+    .sobre_titulo h2 {
+        font-size: 1.9rem;
+    }
+
+    .sobre_titulo p {
+        font-size: 1.1rem;
+    }
+
+    /* Áreas de atuação */
+    .services {
+        padding: 30px 16px;
+    }
+
+    .my_services {
+        padding: 16px 0;
+    }
+
+    .my_services ul li {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+        min-height: 220px;
+        padding: 24px 16px;
+    }
+
+    /* Currículo / cursos */
+    .resume_gerenico .experience_content div,
+    .resume_gerenico .education_content div {
+        padding: 24px;
+    }
+
+    .cursos {
+        padding: 16px;
     }
 
     .funfacts ul li {
         width: 100%;
     }
-}
 
-@media(max-width: 992px) {
+    /* Projetos */
     .projects_armazenamento ul {
         grid-template-columns: repeat(2, 1fr);
+        margin-top: 40px;
+        gap: 16px;
+    }
+
+    .projects ul {
+        flex-wrap: wrap;
+        gap: 12px;
     }
 }
+
+/* Celulares (até 600px) */
+@media (max-width: 600px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .section-div div h2 {
+        font-size: 1.4rem;
+    }
+
+    .section-div div p {
+        font-size: .95rem;
+    }
+
+    .sobre_texto p {
+        font-size: 1rem;
+    }
+
+    .my_services ul li h3 {
+        font-size: 1.3rem;
+    }
+
+    .my_services ul li p {
+        font-size: 1rem;
+    }
+
+    .resume_gerenico h3,
+    .my_skill h3,
+    .funfacts h3 {
+        font-size: 1.2rem;
+        padding: 10px 18px;
+    }
+
+    .skill_content {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        justify-items: center;
+    }
+
+    .project_models ul li {
+        font-size: .85rem;
+        padding: 6px 14px;
+    }
+
+    .projects_armazenamento ul {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .project_info h3 {
+        font-size: .9rem;
+    }
+
+    .project_info p {
+        font-size: .75rem;
+    }
+}
+
+/* Celulares bem pequenos (até 380px) */
+@media(max-width: 380px) {
+    .projects_armazenamento ul {
+        grid-template-columns: 1fr;
+    }
+
+    .funfacts ul {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 /* Em telas sem hover (touch), mantém o título do projeto sempre visível
    em vez de depender de :hover, que não existe no toque */
