@@ -84,11 +84,16 @@ sobreMim();
 // FILTRO DE PROJETOS
 // Cada projeto tem um data-categoria (pode ter mais de uma categoria separada por espaço).
 // "all" sempre mostra tudo; os outros filtros comparam com data-categoria.
+// As categorias válidas são lidas direto das classes dos botões de filtro
+// (all, design, graphic, games, website...), então adicionar uma categoria nova
+// no HTML basta — não precisa mexer aqui.
 function filtroProjetos() {
     const listaItens = document.querySelectorAll('.projects_armazenamento ul li');
     const botoesFiltro = document.querySelectorAll('.project_navegacao li');
 
     if (!listaItens.length || !botoesFiltro.length) return;
+
+    const categoriasValidas = ['all', 'design', 'graphic', 'games', 'website'];
 
     function mostrarCategoria(categoria) {
         listaItens.forEach((item) => {
@@ -106,10 +111,11 @@ function filtroProjetos() {
             botoesFiltro.forEach((item) => item.classList.remove('ativo'));
             botoesFiltro[index].classList.add('ativo');
 
-            if (botao.classList.contains('all')) mostrarCategoria('all');
-            else if (botao.classList.contains('design')) mostrarCategoria('design');
-            else if (botao.classList.contains('graphic')) mostrarCategoria('graphic');
-            else if (botao.classList.contains('website')) mostrarCategoria('website');
+            const categoriaClicada = categoriasValidas.find((categoria) =>
+                botao.classList.contains(categoria)
+            );
+
+            if (categoriaClicada) mostrarCategoria(categoriaClicada);
         });
     });
 }
