@@ -770,22 +770,31 @@ main .sobre {
 
 .projects_armazenamento ul li {
     display: none;
-    position: relative;
     aspect-ratio: 4 / 3;
     overflow: hidden;
     border-radius: 6px;
     background-color: #222;
     border: 1px solid #2a2a2a;
-    transition: transform .3s, border-color .3s;
+    opacity: 0;
+    transform: translateY(16px) scale(.96);
+    transition: opacity .4s ease, transform .4s ease, border-color .3s;
 }
 
+/* Quando o JS marca .ativo, o item entra no grid (display:flex) mas ainda
+   invisível/deslocado; na etapa seguinte o JS adiciona .mostrar, que dispara
+   a transição de opacity/transform — display não anima, por isso as 2 etapas. */
 .projects_armazenamento ul li.ativo {
-    display: block;
+    display: flex;
 }
 
-.projects_armazenamento ul li:hover,
-.projects_armazenamento ul li:focus-within {
-    transform: translateY(-6px);
+.projects_armazenamento ul li.ativo.mostrar {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.projects_armazenamento ul li.ativo.mostrar:hover,
+.projects_armazenamento ul li.ativo.mostrar:focus-within {
+    transform: translateY(-6px) scale(1);
     border-color: #dc3545;
 }
 
