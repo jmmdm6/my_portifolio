@@ -87,6 +87,12 @@ sobreMim();
 // As categorias válidas são lidas direto das classes dos botões de filtro
 // (all, design, graphic, games, website...), então adicionar uma categoria nova
 // no HTML basta — não precisa mexer aqui.
+//
+// Animação: display:none/flex sozinho não anima. Por isso o card entra em
+// duas etapas — 1) recebe .ativo (vira display:flex, mas ainda opacity:0),
+// 2) no frame seguinte recebe .mostrar (dispara a transição de opacity/
+// transform já definida no CSS). Cada card ganha um pequeno atraso
+// (transition-delay) proporcional à sua posição, criando o efeito cascata.
 function filtroProjetos() {
     const listaItens = document.querySelectorAll('.projects_armazenamento ul li');
     const botoesFiltro = document.querySelectorAll('.project_navegacao li');
@@ -94,16 +100,47 @@ function filtroProjetos() {
     if (!listaItens.length || !botoesFiltro.length) return;
 
     const categoriasValidas = ['all', 'design', 'graphic', 'games', 'website'];
+    const ATRASO_ENTRE_CARDS_MS = 60;
+
+    // Se o usuário clicar em dois filtros bem rápido, a animação do clique
+    // anterior (dentro do requestAnimationFrame) não pode "vazar" e mexer nos
+    // cards do clique novo. Por isso cada chamada recebe um número (token);
+    // só a chamada com o token mais recente tem permissão de aplicar 'mostrar'.
+    let chamadaAtual = 0;
 
     function mostrarCategoria(categoria) {
+        chamadaAtual += 1;
+        const minhaChamada = chamadaAtual;
+
+        // tira a animação de quem está saindo e some de cara com todos
         listaItens.forEach((item) => {
+            item.classList.remove('mostrar');
+            item.classList.remove('ativo');
+            item.style.transitionDelay = '0s';
+        });
+
+        const itensParaMostrar = Array.from(listaItens).filter((item) => {
             const categoriasDoItem = (item.dataset.categoria || '').split(' ');
-            const deveMostrar = categoria === 'all' || categoriasDoItem.includes(categoria);
-            item.classList.toggle('ativo', deveMostrar);
+            return categoria === 'all' || categoriasDoItem.includes(categoria);
+        });
+
+        // etapa 1: entra no grid (display:flex) já com o delay calculado
+        itensParaMostrar.forEach((item, i) => {
+            item.style.transitionDelay = `${i * ATRASO_ENTRE_CARDS_MS}ms`;
+            item.classList.add('ativo');
+        });
+
+        // etapa 2: no frame seguinte, dispara a transição de opacity/transform
+        // — só se nenhum outro clique aconteceu nesse meio-tempo
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                if (minhaChamada !== chamadaAtual) return;
+                itensParaMostrar.forEach((item) => item.classList.add('mostrar'));
+            });
         });
     }
 
-    // estado inicial: mostra todos
+    // estado inicial: mostra todos, com animação de entrada
     mostrarCategoria('all');
 
     botoesFiltro.forEach((botao, index) => {
